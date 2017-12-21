@@ -42,7 +42,9 @@ io.on('connection', function(socket){
                 if ( !user ){
                     let newUser = new User({
                         name: req.name,
-                        email: req.email
+                        email: req.email,
+                        verify: true,
+                        isOnline: true
                     });
 
                     newUser.save()
@@ -50,7 +52,12 @@ io.on('connection', function(socket){
                             io.emit('verify', user);
                         } )
                 } else {
-                    io.emit('verify', user);
+                    user.isOnline = true;
+                    user.save()
+                        .then( user => {
+                            io.emit('verify', user);
+                        });
+
                 }
             })
     });

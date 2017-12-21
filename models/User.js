@@ -15,7 +15,9 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now
     },
-
+    verify: {
+        type: String,
+    }
 });
 
 mongoose.model('users', UserSchema);
