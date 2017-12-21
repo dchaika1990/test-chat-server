@@ -37,8 +37,6 @@ io.on('connection', function(socket){
 
     socket.on('verify', function (user) {
 
-        user = JSON.parse(user);
-
         User.findOne({email: user.email})
             .then( user => {
                 if ( !user ){
