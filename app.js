@@ -2,10 +2,14 @@ const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const mongoose = require('mongoose');
-
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 
 const port = process.env.PORT || 5000;
+
+app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
