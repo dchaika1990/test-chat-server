@@ -35,14 +35,14 @@ io.on('connection', function(socket){
         io.emit('connection', 'new user connection');
     });
 
-    socket.on('verify', function (user) {
+    socket.on('verify', function (req) {
 
-        User.findOne({email: user.email})
+        User.findOne({email: req.email})
             .then( user => {
                 if ( !user ){
                     let newUser = new User({
-                        name: user.name,
-                        email: user.email
+                        name: req.name,
+                        email: req.email
                     });
 
                     newUser.save()
