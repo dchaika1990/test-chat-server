@@ -16,7 +16,12 @@ const UserSchema = new Schema({
         default: Date.now
     },
     verify: {
-        type: String,
+        type: Boolean,
+        default: false
+    },
+    isOnline: {
+        type: Boolean,
+        default: false
     }
 });
 

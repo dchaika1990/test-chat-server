@@ -53,6 +53,7 @@ io.on('connection', function(socket){
                         } )
                 } else {
                     user.isOnline = true;
+                    user.verify = true;
                     user.save()
                         .then( user => {
                             io.emit('verify', user);
