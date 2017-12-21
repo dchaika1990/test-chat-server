@@ -63,6 +63,15 @@ io.on('connection', function(socket){
             })
     });
 
+    socket.on('getUsers', function () {
+
+        User.find({})
+            .then( users => {
+                io.emit('getUsers', users);
+            })
+
+    });
+
     socket.on('disconnect', function(){
         io.emit('disconnect', 'user disconnected');
     });
