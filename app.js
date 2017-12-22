@@ -67,11 +67,11 @@ io.on('connection', function(socket){
             })
     });
 
-    socket.on('getUsers', function () {
+    socket.on('getUsers', function (fn) {
 
         User.find({})
             .then( users => {
-                io.emit('getUsers', users);
+                fn(users);
             })
 
     });
