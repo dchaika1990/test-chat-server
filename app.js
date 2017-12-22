@@ -31,7 +31,7 @@ const User = mongoose.model('users');
 
 io.on('connection', function(socket){
 
-    socket.broadcast.emit('connection');
+    socket.emit('connection');
 
     // socket.on('connection', function(){
     //     io.emit('connection', 'new user connection');
