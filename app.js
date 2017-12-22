@@ -31,9 +31,11 @@ const User = mongoose.model('users');
 
 io.on('connection', function(socket){
 
-    socket.on('connection', function(){
-        io.emit('connection', 'new user connection');
-    });
+    io.emit('connection', 'new user connection');
+
+    // socket.on('connection', function(){
+    //     io.emit('connection', 'new user connection');
+    // });
 
     socket.on('verify', function (req) {
 
@@ -72,7 +74,7 @@ io.on('connection', function(socket){
 
     });
 
-    socket.on('disconnect', function(){
+    socket.on('disconnect', function(user){
         io.emit('disconnect', 'user disconnected');
     });
     socket.on('chat message', function(msg){
