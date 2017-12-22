@@ -80,7 +80,15 @@ io.on('connection', function(socket){
         io.emit('disconnect', 'user disconnected');
     });
     socket.on('chat message', function(msg, user){
-        io.emit('chat message', msg, user);
+        User.findOne({email: user.email})
+            .then( user => {
+                user.lastMessage = msg;
+                user.save()
+                    .then( user => {
+                        io.emit('chat message', msg, user);
+                    });
+
+            });
     });
 
     socket.on('write message', function(name){

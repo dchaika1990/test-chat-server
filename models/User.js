@@ -22,7 +22,12 @@ const UserSchema = new Schema({
     isOnline: {
         type: Boolean,
         default: false
+    },
+    lastMessage: {
+        type: String,
+        default: ''
     }
+
 });
 
 mongoose.model('users', UserSchema);
