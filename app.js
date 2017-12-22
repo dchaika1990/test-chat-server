@@ -82,6 +82,10 @@ io.on('connection', function(socket){
     socket.on('chat message', function(msg){
         io.emit('chat message', msg);
     });
+
+    socket.on('write message', function(){
+        io.emit('write message');
+    });
 });
 
 http.listen(port, function(){
