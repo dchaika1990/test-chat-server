@@ -37,7 +37,7 @@ io.on('connection', function(socket){
     //     io.emit('connection', 'new user connection');
     // });
 
-    socket.on('verify', function (req) {
+    socket.on('verify', function (req, fn) {
 
         User.findOne({email: req.email})
             .then( user => {
@@ -51,14 +51,16 @@ io.on('connection', function(socket){
 
                     newUser.save()
                         .then( user => {
-                            io.emit('verify', user);
+                            // io.emit('verify', user);
+                            fn(true)
                         } )
                 } else {
                     user.isOnline = true;
                     user.verify = true;
                     user.save()
                         .then( user => {
-                            io.emit('verify', user);
+                            // io.emit('verify', user);
+                            fn(true)
                         });
 
                 }
