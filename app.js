@@ -83,8 +83,8 @@ io.on('connection', function(socket){
         io.emit('chat message', msg);
     });
 
-    socket.on('write message', function(){
-        io.emit('write message');
+    socket.on('write message', function(name){
+        io.emit('write message', name);
     });
 });
 
