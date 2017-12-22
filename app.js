@@ -51,7 +51,6 @@ io.on('connection', function(socket){
 
                     newUser.save()
                         .then( user => {
-                            // io.emit('verify', user);
                             fn(user)
                         } )
                 } else {
@@ -59,7 +58,6 @@ io.on('connection', function(socket){
                     user.verify = true;
                     user.save()
                         .then( user => {
-                            // io.emit('verify', user);
                             fn(user)
                         });
 
@@ -79,20 +77,22 @@ io.on('connection', function(socket){
     socket.on('disconnect', function(user){
         io.emit('disconnect', 'user disconnected');
     });
-    socket.on('chat message', function(msg, user){
+
+    socket.on('chatMessage', function(msg, user){
+
         User.findOne({email: user.email})
             .then( user => {
                 user.lastMessage = msg;
                 user.save()
                     .then( user => {
-                        io.emit('chat message', msg, user);
+                        io.emit('chatMessage', msg, user);
                     });
 
             });
     });
 
-    socket.on('write message', function(name){
-        io.emit('write message', name);
+    socket.on('writeMessage', function(name){
+        io.emit('writeMessage', name);
     });
 });
 
