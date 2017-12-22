@@ -52,7 +52,7 @@ io.on('connection', function(socket){
                     newUser.save()
                         .then( user => {
                             // io.emit('verify', user);
-                            fn(true)
+                            fn(user)
                         } )
                 } else {
                     user.isOnline = true;
@@ -60,7 +60,7 @@ io.on('connection', function(socket){
                     user.save()
                         .then( user => {
                             // io.emit('verify', user);
-                            fn(true)
+                            fn(user)
                         });
 
                 }
