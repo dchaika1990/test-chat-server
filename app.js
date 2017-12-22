@@ -31,11 +31,9 @@ const User = mongoose.model('users');
 
 io.on('connection', function(socket){
 
-    io.emit('connection', 'new user connection');
-
-    // socket.on('connection', function(){
-    //     io.emit('connection', 'new user connection');
-    // });
+    socket.on('connection', function(){
+        io.emit('connection', 'new user connection');
+    });
 
     socket.on('verify', function (req) {
 
