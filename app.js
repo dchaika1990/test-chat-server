@@ -37,33 +37,35 @@ io.on('connection', function(socket){
     socket.on('verify', function (req, fn) {
 
         if ( !req.email && !req.name ) {
-           return fn('please provide email and name', null);
-        }
-
-        User.findOne({email: req.email})
-            .then( user => {
-                if ( !user ){
-                    let newUser = new User({
-                        name: req.name,
-                        email: req.email,
-                        verify: true,
-                        isOnline: true
-                    });
-
-                    newUser.save()
-                        .then( user => {
-                            fn(user)
-                        } )
-                } else {
-                    user.isOnline = true;
-                    user.verify = true;
-                    user.save()
-                        .then( user => {
-                            fn(user)
+            fn('please provide email and name', null);
+        } else {
+            User.findOne({email: req.email})
+                .then( user => {
+                    if ( !user ){
+                        let newUser = new User({
+                            name: req.name,
+                            email: req.email,
+                            verify: true,
+                            isOnline: true
                         });
 
-                }
-            })
+                        newUser.save()
+                            .then( user => {
+                                fn(user)
+                            } )
+                    } else {
+                        user.isOnline = true;
+                        user.verify = true;
+                        user.save()
+                            .then( user => {
+                                fn(user)
+                            });
+
+                    }
+                })
+        }
+
+
     });
 
     socket.on('getUsers', function (fn) {
