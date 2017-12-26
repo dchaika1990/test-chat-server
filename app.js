@@ -36,7 +36,7 @@ io.on('connection', function(socket){
 
     socket.on('verify', function (req, fn) {
 
-        if ( !req.email && !req.name ) {
+        if ( !req || !req.email || !req.name ) {
             fn('please provide email and name', null);
         } else {
             User.findOne({email: req.email})
