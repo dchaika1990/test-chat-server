@@ -33,11 +33,12 @@ io.on('connection', function(socket){
 
     socket.emit('connection');
 
-    // socket.on('connection', function(){
-    //     io.emit('connection', 'new user connection');
-    // });
 
     socket.on('verify', function (req, fn) {
+
+        if ( !req.email && !req.name ) {
+           return fn('please provide email and name', null);
+        }
 
         User.findOne({email: req.email})
             .then( user => {
