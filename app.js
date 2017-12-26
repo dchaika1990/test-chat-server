@@ -51,14 +51,14 @@ io.on('connection', function(socket){
 
                         newUser.save()
                             .then( user => {
-                                fn(user)
+                                fn(null, user)
                             } )
                     } else {
                         user.isOnline = true;
                         user.verify = true;
                         user.save()
                             .then( user => {
-                                fn(user)
+                                fn(null, user)
                             });
 
                     }
