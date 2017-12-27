@@ -1,6 +1,8 @@
 ## CHAT
 
 [Порядок вызова событий](#sequence-actions)
+
+
 [События](#events)
 
 
