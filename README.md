@@ -1,6 +1,6 @@
 ## CHAT
 
-[События](#Events)
+[События](#events)
 
 ### Events
 
