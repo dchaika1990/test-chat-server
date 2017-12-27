@@ -7,7 +7,7 @@
 1. **Verify** . Данное событие принимает объект с информацией о пользователе и callback функцию которая сработает в результате успешного общения с сервером
 
 
-Пример вызова события с клиента.
+*Пример вызова события с клиента.*
 
 ```js
  socket.emit( 'verify', { email: 'exanple@example.com', name: 'TesUser' }, function (error, res) {
@@ -18,7 +18,7 @@
  } );
 ```
 
-Пример вызова события с клиента в виде промиса.
+*Пример вызова события с клиента в виде промиса.*
 
 ```js
  return new Promise(function (resolve, reject) {
@@ -31,4 +31,32 @@
      } );
 
  })
+```
+
+2. **getUsers** . Данное событие принимает callback функцию которая сработает в результате успешного общения с сервером
+
+
+*Пример вызова события с клиента.*
+
+```js
+ socket.emit( 'getUsers', function (users) {
+
+    console.log(users) // вы получаете всех пользователей которые есть в чате
+
+ } );
+```
+
+*Пример вызова события с клиента в виде промиса.*
+
+```js
+ return new Promise(function (resolve, reject) {
+
+     socket.emit( 'getUsers', function (users) {
+
+         if ( !users ) reject('Users not found');
+         resolve( users );
+
+     } );
+
+ });
 ```
