@@ -87,17 +87,24 @@ io.on('connection', function(socket){
     });
 
     socket.on('chatMessage', function(msg, user){
+        if ( !msg ) return io.emit('error', new Error('Нет сообщения'));
 
-        User.findOne({email: user.email})
-            .then( user => {
-                user.lastMessage = msg;
-                user.save()
-                    .then( user => {
-                        io.emit('chatMessage', msg, user);
-                    });
+        if ( !user || !user.email || !user.name ) {
+            return io.emit('error', new Error('Не передана информация о пользователе '));
+        } else {
+            User.findOne({email: user.email})
+                .then( user => {
+                    user.lastMessage = msg;
+                    user.save()
+                        .then( user => {
+                            io.emit('chatMessage', msg, user);
+                        });
 
-            });
+                });
+        }
+
     });
+
 
     socket.on('writeMessage', function(name){
         io.emit('writeMessage', name);
