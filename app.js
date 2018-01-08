@@ -35,7 +35,7 @@ io.on('connection', function(socket){
 
 
     socket.on('verify', function (req, fn) {
-        if ( !fn ) return;
+        if ( !fn ) return io.emit('error', new Error('Не передана функция callback'));
 
         if ( !req || !req.email || !req.name ) {
             fn('please provide email and name', null);
@@ -80,6 +80,10 @@ io.on('connection', function(socket){
 
     socket.on('disconnect', function(user){
         io.emit('disconnect', 'user disconnected ');
+    });
+
+    socket.on('error', function(error){
+        io.emit('error', error);
     });
 
     socket.on('chatMessage', function(msg, user){
