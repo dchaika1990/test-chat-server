@@ -35,6 +35,7 @@ io.on('connection', function(socket){
 
 
     socket.on('verify', function (req, fn) {
+        if ( !fn ) return;
 
         if ( !req || !req.email || !req.name ) {
             fn('please provide email and name', null);
