@@ -78,7 +78,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('disconnect', function(user){
-        io.emit('disconnect', 'user disconnected');
+        io.emit('disconnect', 'user disconnected ');
     });
 
     socket.on('chatMessage', function(msg, user){
